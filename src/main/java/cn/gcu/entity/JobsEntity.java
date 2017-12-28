@@ -22,8 +22,6 @@ public class JobsEntity extends IdEntity {
 	private int lowSal;
 	@Column(name = "f_high_sal")
 	private int highSal;
-	@Column(name = "f_name")
-	private String name;
 	@Column(name = "f_describe")
 	@Type(type = "text")
 	private String describe;
@@ -61,14 +59,6 @@ public class JobsEntity extends IdEntity {
 
 	public void setHighSal(int highSal) {
 		this.highSal = highSal;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getDescribe() {
