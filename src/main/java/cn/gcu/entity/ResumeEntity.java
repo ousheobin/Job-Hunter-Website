@@ -42,6 +42,9 @@ public class ResumeEntity extends IdEntity {
 	@Column(name = "f_evaluate")
 	@Type(type = "text")
 	private String evaluate;
+	@Column(name = "f_project_experience")
+	@Type(type = "text")
+	private String projectExperience;
 	@ManyToOne
 	@JoinColumn(name = "f_user")
 	private UserEntity user;
@@ -140,6 +143,14 @@ public class ResumeEntity extends IdEntity {
 
 	public void setUser(UserEntity user) {
 		this.user = user;
+	}
+
+	public String getProjectExperience() {
+		return projectExperience;
+	}
+
+	public void setProjectExperience(String projectExperience) {
+		this.projectExperience = projectExperience;
 	}
 
 }
