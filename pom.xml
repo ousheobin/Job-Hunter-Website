@@ -232,12 +232,6 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.31</version>
 		</dependency>
-		<!-- SQL Server 数据库连接 -->
-		<dependency>
-    			<groupId>com.microsoft.sqlserver</groupId>
-    			<artifactId>mssql-jdbc</artifactId>
-    			<version>6.3.6.jre8-preview</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
