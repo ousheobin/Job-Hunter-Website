@@ -102,7 +102,7 @@ public class BaseDaoImpl<T, PrimaryKey extends Serializable> extends HibernateDa
 	@Override
 	public Page<T> queryByPage(int pageNumber , int prePage) {
 		long sum = this.count();
-		final String hql = "from "+entity.getTypeName();
+		final String hql = "from "+entity.getTypeName()+"order by id desc";
 		final Page<T> page = new Page<T>();
 		PageUtil.generatePage(page, sum, prePage, pageNumber);
 		List<T> res = getHibernateTemplate().execute(new HibernateCallback<List<T>>() {
