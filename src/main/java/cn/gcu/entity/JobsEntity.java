@@ -36,6 +36,8 @@ public class JobsEntity extends IdEntity {
 	private EnterpiseEntity enterpise;
 	@Column(name = "f_publish_date")
 	private Date publishDate;
+	@Column(name = "f_is_delete")
+	private boolean isDelete;
 
 	public String getJobName() {
 		return jobName;
@@ -99,6 +101,14 @@ public class JobsEntity extends IdEntity {
 
 	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 }
