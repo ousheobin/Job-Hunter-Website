@@ -28,7 +28,7 @@ local.properties
 .buildpath
 
 # Database Config File
-config.properties
+*/config.properties
 
 # Mac OSX
 .DS_Store
