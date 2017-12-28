@@ -232,6 +232,13 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.31</version>
 		</dependency>
+		<!-- SQL Server 数据库连接 -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+			<scope>test</scope>
+		</dependency>	
 	</dependencies>
 	<build>
 		<plugins>
