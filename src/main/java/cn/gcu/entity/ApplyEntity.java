@@ -59,5 +59,13 @@ public class ApplyEntity extends IdEntity {
 	public void setOffer(boolean isOffer) {
 		this.isOffer = isOffer;
 	}
+	
+	public ResumeEntity resume() {
+		return resume;
+	}
+	
+	public void setResume(ResumeEntity resume) {
+		this.resume = resume;
+	}
 
 }
