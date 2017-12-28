@@ -27,5 +27,8 @@ local.properties
 # PDT-specific
 .buildpath
 
+# Database Config File
+config.properties
+
 # Mac OSX
 .DS_Store
