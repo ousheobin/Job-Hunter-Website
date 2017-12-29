@@ -245,8 +245,6 @@ public class LoginController {
 				if(vericode.getCode().equals(code)) {
 					UserEntity user = userService.getUserByUserName(username);
 					res.put("status", "ok");
-					//跳到设置密码页面
-					//res.put("nextStep", "setpassword.html");
 					res.put("oldSecurityPassword", user.getPassword());
 					request.getSession().setAttribute("isLogin", true);
 					request.getSession().setAttribute("type", "user");
