@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.gcu.entity.EnterpiseEntity;
 //import cn.gcu.entity.EnterpiseEntity;
 import cn.gcu.entity.JobsEntity;
 import cn.gcu.pojo.Page;
@@ -71,27 +72,33 @@ public class JobController {
 //		jobService.deleteJob(jobId);
 //	}
 	
-	@RequestMapping(value="add_job")
-	public void addJob(HttpServletRequest request,HttpServletResponse response) {
-		String describe = request.getParameter("describe");
-//		String enterpiseId = request.getParameter("enterpiseId");
-//		EnterpiseEntity enterpise = enterpiseService.get(enterpiseId);
-		int highSal = Integer.parseInt((String)request.getParameter("highSal"));
-		int lowSal = Integer.parseInt((String)request.getParameter("lowSal"));
-		String jobName = request.getParameter("jobName");
-		String place = request.getParameter("place");
-//		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Date date = dateFormat.parse((String)request.getParameter("date"));
-		String require = request.getParameter("require");
-		JobsEntity job = new JobsEntity();
-		job.setDescribe(describe);
-//		job.setEnterpise(enterpise);
-		job.setHighSal(highSal);
-		job.setLowSal(lowSal);
-		job.setJobName(jobName);
-		job.setPlace(place);
-//		job.setPublishDate(publishDate);
-		job.setRequire(require);
-		jobService.addJob(job);
+	@RequestMapping(value="enterpise/add_job")
+	@ResponseBody
+	public Map<String,Object> addJob(HttpServletRequest request,HttpServletResponse response) {
+		Map<String,Object> res = new HashMap<String,Object>();
+		EnterpiseEntity enterpise = (EnterpiseEntity) request.getSession().getAttribute("enterpiseEntity");
+		if(enterpise!=null) {
+			String describe = request.getParameter("describe");
+			int highSal = Integer.parseInt((String)request.getParameter("highSal"));
+			int lowSal = Integer.parseInt((String)request.getParameter("lowSal"));
+			String jobName = request.getParameter("jobName");
+			String place = request.getParameter("place");
+			String require = request.getParameter("require");
+			JobsEntity job = new JobsEntity();
+			job.setJobName(jobName);
+			job.setDescribe(describe);
+			job.setEnterpise(enterpise);
+			job.setHighSal(highSal);
+			job.setLowSal(lowSal);
+			job.setJobName(jobName);
+			job.setPlace(place);
+			job.setPublishDate(new Date());
+			job.setRequire(require);
+			jobService.addJob(job);
+			res.put("status", "ok");
+		}else {
+			res.put("status", "error");
+		}
+		return res;
 	}
 }

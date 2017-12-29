@@ -3,6 +3,8 @@ package cn.gcu.service;
 import java.util.List;
 
 import cn.gcu.entity.ApplyEntity;
+import cn.gcu.entity.EnterpiseEntity;
+import cn.gcu.pojo.Page;
 
 public interface ApplyService {
 	
@@ -11,4 +13,6 @@ public interface ApplyService {
 	public void deleteApply(String applyId);
 	
 	public void addApply(ApplyEntity apply);
+	
+	public Page<ApplyEntity> getApplyByEnterpise(EnterpiseEntity enterpise,int pageNumber);
 }

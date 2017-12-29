@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.gcu.dao.ApplyDao;
 import cn.gcu.entity.ApplyEntity;
+import cn.gcu.entity.EnterpiseEntity;
+import cn.gcu.pojo.Page;
 import cn.gcu.service.ApplyService;
 
 @Service
@@ -34,6 +36,11 @@ public class ApplyServiceImpl implements ApplyService {
 	@Transactional
 	public void addApply(ApplyEntity apply) {
 		applyDao.save(apply);
+	}
+
+	@Override
+	public Page<ApplyEntity> getApplyByEnterpise(EnterpiseEntity enterpise, int pageNumber) {
+		return applyDao.getApplyByEnterpise(enterpise, 5, pageNumber);
 	}
 
 }
