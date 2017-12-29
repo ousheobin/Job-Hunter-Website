@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
@@ -11,9 +12,9 @@
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-index.css" />
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-job-detail.css" />
 </head>
+
 <body>
     <!-- Navbar Begin -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,10 +31,10 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a href="index.html">首页</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="discovery.html">发现</a>
                     </li>
                     <li>
@@ -45,7 +46,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                    	<c:if test="${sessionScope.isLogin != null }">
+                        <c:if test="${sessionScope.isLogin != null }">
                     		<a href="logout">退出</a>
                     	</c:if>
                     	<c:if test="${sessionScope.isLogin == null }">
@@ -57,57 +58,47 @@
         </div>
     </nav>
     <!-- Navbar end -->
-    <!-- Slider Begin -->
-    <div class="slider-box">
-        <div id="slider" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#slider" data-slide-to="2"></li>
-                <li data-target="#slider" data-slide-to="1" class="active"></li>
-                <li data-target="#slider" data-slide-to="0"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item pic-3"></div>
-                <div class="item pic-1 active"></div>
-                <div class="item pic-2"></div>
-            </div>
-            <a class="left carousel-control" href="#slider" role="button" data-slide="prev">
-                <span class="fa fa-chevron-left" aria-hidden="true"></span>
-            </a>
-            <a class="right carousel-control" href="#slider" role="button" data-slide="next">
-                <span class="fa fa-chevron-right" aria-hidden="true"></span>
-            </a>
-        </div>
+    <!-- Banner Begin -->
+    <div class="banner-container">
+        <p class="title">${jobDetail.jobName }</p>
+        <p>${jobDetail.enterpise.enterpiseName }</p>
     </div>
-    <!-- Slider End -->
+    <!-- Banner End -->
     <!-- Main Container -->
     <div class="container">
-        <div>
-            <div class="header-row">
-                <a class="more" href="discovery.html">查看更多</a>
-                <h3 class="title">最新招聘信息</h3>
-            </div>
-            <c:forEach items="${requestScope.jobPage.pageData }" var="item">
-            <div class="col-md-3 col-xs-12 col-sm12 job-detail">
-                <a href="job-deatil-${item.id}.html">
-                    <p>${item.jobName }</p>
-                    <p>${item.enterpise.enterpiseName }</p>
-                </a>
-            </div>  
-            </c:forEach>
+        <div class="content">
+            <h3>职位信息 Offer Detail</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td class="col-md-4 text-right">薪酬水平 Salary</td>
+                    <td class="col-md-8">${jobDetail.lowSal }-${jobDetail.highSal }</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4 text-right">工作地点 Place</td>
+                    <td class="col-md-8">${jobDetail.place }</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4 text-right">岗位描述 Describe</td>
+                    <td class="col-md-8">${jobDetail.describe }</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4 text-right">岗位需求 Requires</td>
+                    <td class="col-md-8">${jobDetail.require }</td>
+                </tr>
+            </table>
+            <a class="btn btn-primary btn-block" href="apply.html?id=${jobDetail.id }">申请 Apply</a>
+            <p class="text-center"><a href="javascript:history.go(-1);">返回</a></p>
         </div>
     </div>
-    <div class="join">
-        <p class="text-center">
-            <a href="login.html" class="btn btn-primary btn-lg">登录或注册，马上开始</a>
-        </p>
-    </div>
     <div class="footer">
-        <p><a href="enterprise-login.html">我要发布招聘信息</a></p>
+        <p>
+            <a href="enterprise-login.html">我要发布招聘信息</a>
+        </p>
         <p>Guangzhou College &copy; 2006-2017 All rights reserve.</p>
     </div>
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
 </body>
+
 </html>

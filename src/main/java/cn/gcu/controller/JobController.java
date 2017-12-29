@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -54,22 +55,21 @@ public class JobController {
 		}
 		return"public/search";
 	}
-	
-	@RequestMapping(value="job_list")
-	@ResponseBody
-	public Map<String ,Object> getJobList(HttpServletRequest request,HttpServletResponse response){
-		List<JobsEntity> jList = jobService.getAllJob();
-		String listString = String.valueOf(jList);
-		Map<String ,Object> res = new HashMap<String ,Object>();
-		res.put("jobList", listString);
-		return res;
+
+	@RequestMapping(value="job-deatil-{id}.html")
+	public String getDetailPage(@PathVariable(value="id")String detailId,HttpServletRequest request,HttpServletResponse response) {
+		if(detailId!=null && !detailId.isEmpty()) {
+			JobsEntity job = jobService.getJobById(detailId);
+			request.setAttribute("jobDetail", job);
+		}
+		return "public/job-detail";
 	}
 	
-	@RequestMapping(value="delete_job")
-	public void deleteJob(HttpServletRequest request,HttpServletResponse response) {
-		String jobId = request.getParameter("jobId");
-		jobService.deleteJob(jobId);
-	}
+//	@RequestMapping(value="delete_job")
+//	public void deleteJob(HttpServletRequest request,HttpServletResponse response) {
+//		String jobId = request.getParameter("jobId");
+//		jobService.deleteJob(jobId);
+//	}
 	
 	@RequestMapping(value="add_job")
 	public void addJob(HttpServletRequest request,HttpServletResponse response) {

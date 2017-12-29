@@ -73,9 +73,8 @@
         </form>
         <div class="row">
         <c:forEach items="${requestScope.pageData.pageData}" var="item" >
-        
 	        <div class="col-md-4 col-xs-12 col-sm-12 job-box">
-	            <a class="content-container" href="job-detail.html">
+	            <a class="content-container" href="job-deatil-${item.id }.html">
 	                <div class="row">
 	                    <div class="col-md-8 col-xs-8 col-sm-8">
 	                        <p class="job-name">${item.jobName }</p>
