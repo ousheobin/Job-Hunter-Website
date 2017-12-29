@@ -70,10 +70,10 @@
                     <label class="col-md-12 no-left-padding">手机号码</label>
                     <div class="col-md-12 row mobile-row">
                         <div class="col-md-8 col-xs-8 col-sm-8 no-left-padding">
-                            <input type="text" class="form-control" placeholder="请输入手机号码">
+                            <input type="text" class="form-control" id="phone" placeholder="请输入手机号码">
                         </div>
                         <div class="col-md-4 col-xs-4 col-sm-4 btn-container">
-                            <button class="btn btn-primary btn-block">获取验证码</button>
+                            <button class="btn btn-primary btn-block" id="vericodeButton">获取验证码</button>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                     <label for="password-repeat">请重复新密码</label>
                     <input type="password-repeat" class="form-control" id="password-repeat" placeholder="请输入密码">
                 </div>
-                <button type="submit" class="btn btn-success btn-block">更新密码</button>
+                <button type="submit" class="btn btn-success btn-block" id="submitButton">更新密码</button>
             </form>
             <hr>
             <a href="login.html" class="btn btn-default btn-block">返回登录</a>
@@ -105,6 +105,7 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-forget-password"></script>
 </body>
 
 </html>
