@@ -1,6 +1,5 @@
 var isSend = false;
 $("#vericodeButton").click(function(){
-	alert("click button");
 	var hasNotFinish = false;
 	var value = $("#phone").val();
 	if(value == "" || value.length < 1){

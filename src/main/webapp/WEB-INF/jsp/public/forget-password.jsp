@@ -105,7 +105,7 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-forget-password"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-forget-password.js"></script>
 </body>
 
 </html>
