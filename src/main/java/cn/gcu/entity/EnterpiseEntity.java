@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_enterpise_user")
 public class EnterpiseEntity extends IdEntity {
@@ -12,8 +14,10 @@ public class EnterpiseEntity extends IdEntity {
 
 	@Column(name = "f_enterpise_name")
 	public String enterpiseName;
+	@JsonIgnore
 	@Column(name = "f_user_name")
 	public String userName;
+	@JsonIgnore
 	@Column(name = "f_password")
 	public String password;
 

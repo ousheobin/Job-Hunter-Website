@@ -37,21 +37,25 @@ public class ApplyController {
 	@Resource
 	UserService userService;
 	
-	@RequestMapping(value="apply_list")
-	@ResponseBody
-	public Map<String ,Object> getApplyList(HttpServletRequest request,HttpServletResponse response){
-		String userId = request.getParameter("userId");
-		List<ApplyEntity> aList = applyService.getApplyByUserId(userId);
-		String listString = String.valueOf(aList);
-		Map<String ,Object> res = new HashMap<String ,Object>();
-		res.put("applyList", listString);
-		return res;
+	@RequestMapping(value="mine.html")
+	public String getMinePage(HttpServletRequest request) {
+		return "user/mine";
 	}
 	
-	@RequestMapping(value="delete_apply")
-	public void delteApply(HttpServletRequest request,HttpServletResponse response) {
-		String applyId = request.getParameter("applyId");
-		applyService.deleteApply(applyId);
+	@RequestMapping(value="user/apply_list")
+	@ResponseBody
+	public Map<String ,Object> getApplyList(HttpServletRequest request,HttpServletResponse response){
+		Map<String ,Object> res = new HashMap<String ,Object>();
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userEntity");
+		if(user!=null) {
+			String userId = user.getId();
+			List<ApplyEntity> aList = applyService.getApplyByUserId(userId);
+			res.put("status", "ok");
+			res.put("applyList", aList);
+		}else {
+			res.put("status", "error");
+		}
+		return res;
 	}
 	
 	@RequestMapping(value="add_apply")

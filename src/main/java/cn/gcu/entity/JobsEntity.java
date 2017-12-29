@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_jobs")
 public class JobsEntity extends IdEntity {
@@ -36,6 +38,7 @@ public class JobsEntity extends IdEntity {
 	private EnterpiseEntity enterpise;
 	@Column(name = "f_publish_date")
 	private Date publishDate;
+	@JsonIgnore
 	@Column(name = "f_is_delete")
 	private boolean isDelete = false;
 
