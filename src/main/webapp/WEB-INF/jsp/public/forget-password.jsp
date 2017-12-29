@@ -87,7 +87,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password-repeat">请重复新密码</label>
-                    <input type="password-repeat" class="form-control" id="password-repeat" placeholder="请输入密码">
+                    <input type="password" class="form-control" id="password-repeat" placeholder="请输入密码">
                 </div>
                 <button type="button" class="btn btn-success btn-block" id="submitButton">更新密码</button>
             </form>

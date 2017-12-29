@@ -45,7 +45,7 @@ $("#submitButton").click(function(){
 	if(hasNotFinish){
 		alert("您还有内容没填写，请重新检查一下哦");
 	}
-	if(("#password").val()!=("#password-repeat").val()){
+	if($("#password").val()!=$("#password-repeat").val()){
 		alert("两次输入的密码不正确");
 	}
 	$.ajax({
