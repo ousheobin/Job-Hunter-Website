@@ -26,7 +26,7 @@ $("#rigisiterButton").click(function(){
 			dataType : "json",
 			success : function(data){
 				if(data.status == "ok"){
-					//注册成功，自动登陆，跳转首页
+					window.location.href="index.html";
 				}
 				else {
 					alert("错误："+data.message);
@@ -38,8 +38,8 @@ $("#rigisiterButton").click(function(){
 		});
 	}
 });
-
-$("vericodeButton").click(function(){
+var isSend = false;
+$("#vericodeButton").click(function(){
 	var hasNotFinish = false;
 	var value = $("#phone").val();
 	if(value == "" || value.length < 1){
@@ -47,18 +47,24 @@ $("vericodeButton").click(function(){
 	}
 	if(hasNotFinish){
 		alert("您还有内容没填写，请重新检查一下哦");
+		return;
+	}
+	if(isSend){
+		return;
 	}
 	$.ajax({
 		type : 'POST',
 		url : "getVericode",
 		data : {
-			"phone" : ("#phone").val()
+			"phone" : $("#phone").val()
 		},
 		cache:false,
 		dataType:"json",
 		success:function(data){
 			if(data.status == "ok"){
-				//发送成功，修改button不能点击
+				$("#vericodeButton").html("验证码已发送");
+				$("#vericodeButton").addClass("disabled");
+				isSend = true;
 			}
 			else {
 				alter("错误："+data.message);

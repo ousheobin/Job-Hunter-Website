@@ -8,17 +8,18 @@ $("loginButton").click(function(){
 	});
 	if(hasNotFinish){
 		alert("您还有内容没填写，请重新检查一下哦");
+		return;
 	}
 	$.ajax({
 		type : 'POST',
 		url : "enterpise_login_confirm",
 		data : {
-			"username":("#username").val(),
-			"password":("#password").val()
+			"username":$("#username").val(),
+			"password":$("#password").val()
 		},
 		success:function(data){
 			if(data.status == "ok"){
-				//登陆成功，跳转index
+				location.href="index.html";
 			}
 			else {
 				alert("错误："+data.message);

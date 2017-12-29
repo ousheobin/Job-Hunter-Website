@@ -213,7 +213,7 @@ public class LoginController {
 		Map<String ,Object> res = new HashMap<String ,Object>();
 		Date getVericodeDate = (Date)request.getSession().getAttribute("getVericodeDate");
 		String phone = request.getParameter("phone");
-		if(getVericodeDate.compareTo(new Date())<0) {
+		if(getVericodeDate==null || getVericodeDate.compareTo(new Date())<0) {
 			String verificationCode = VericodeUtil.sendVerificationCode();
 			Date generateDate = new Date();
 			Date expireDate = new Date(generateDate.getTime()+60000);

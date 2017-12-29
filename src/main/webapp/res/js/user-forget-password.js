@@ -1,3 +1,4 @@
+var isSend = false;
 $("vericodeButton").click(function(){
 	var hasNotFinish = false;
 	var value = $("#phone").val();
@@ -7,17 +8,22 @@ $("vericodeButton").click(function(){
 	if(hasNotFinish){
 		alert("您还有内容没填写，请重新检查一下哦");
 	}
+	if(isSend){
+		return;
+	}
 	$.ajax({
 		type : 'POST',
 		url : "getVericode",
 		data : {
-			"phone" : ("#phone").val()
+			"phone" : $("#phone").val()
 		},
 		cache:false,
 		dataType:"json",
 		success:function(data){
 			if(data.status == "ok"){
-				//发送成功，修改button不能点击
+				$("#vericodeButton").html("验证码已发送");
+				$("#vericodeButton").addClass("disabled");
+				isSend = true;
 			}
 			else {
 				alter("错误："+data.message);
@@ -44,14 +50,14 @@ $("submitButton").click(function(){
 		type : 'POST',
 		url : "forget_password",
 		data : {
-			"username":("#username").val(),
-			"code":("#vericode").val(),
-			"phone":("#phone").val(),
-			"newPassword":("#password").val()
+			"username":$("#username").val(),
+			"code":$("#vericode").val(),
+			"phone":$("#phone").val(),
+			"newPassword":$("#password").val()
 		},
 		success : function(data){
 			if(data.status == "ok"){
-				//修改密码成功，自动登陆
+				location.href="index.html";
 			}
 			else {
 				alert("出错："+data.message);
