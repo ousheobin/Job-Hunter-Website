@@ -78,6 +78,10 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text">验证码</label>
+                    <input type="text" class="form-control" id="vericode" placeholder="请输入验证码">
+                </div>
+                <div class="form-group">
                     <label for="password">新密码</label>
                     <input type="password" class="form-control" id="password" placeholder="请输入密码">
                 </div>
