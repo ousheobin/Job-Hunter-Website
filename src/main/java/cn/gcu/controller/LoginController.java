@@ -1,6 +1,10 @@
 package cn.gcu.controller;
 
+<<<<<<< HEAD
 import java.util.Date;
+=======
+import java.io.IOException;
+>>>>>>> branch 'master' of https://gitee.com/ousheobun/Job-Hunter.git
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +93,7 @@ public class LoginController {
 		return res;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="user_register")
 	@ResponseBody
 	public Map<String ,Object>userRegister(HttpServletRequest request,HttpServletResponse response){
@@ -261,5 +266,11 @@ public class LoginController {
 			res.put("message", "验证码过期");
 		}
 		return res;
+=======
+	@RequestMapping(value="logout")
+	public void logout(HttpServletRequest request , HttpServletResponse response) throws IOException {
+		request.getSession().invalidate();
+		response.sendRedirect("index.html");
+>>>>>>> branch 'master' of https://gitee.com/ousheobun/Job-Hunter.git
 	}
 }

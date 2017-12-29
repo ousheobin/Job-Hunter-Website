@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.gcu.entity.ApplyEntity;
 import cn.gcu.entity.JobsEntity;
+import cn.gcu.entity.ResumeEntity;
 //import cn.gcu.entity.ResumeEntity;
 import cn.gcu.entity.UserEntity;
 import cn.gcu.service.ApplyService;
 import cn.gcu.service.JobService;
+import cn.gcu.service.ResumeService;
 import cn.gcu.service.UserService;
 
 @Controller
@@ -31,8 +33,8 @@ public class ApplyController {
 	@Resource
 	JobService jobService;
 	
-//	@Resource
-//	ResumeService resumeService;
+	@Resource
+	ResumeService resumeService;
 	
 	@Resource
 	UserService userService;
@@ -40,6 +42,16 @@ public class ApplyController {
 	@RequestMapping(value="mine.html")
 	public String getMinePage(HttpServletRequest request) {
 		return "user/mine";
+	}
+	
+	@RequestMapping(value="apply.html")
+	public String getApplyPage(String id,HttpServletRequest request) {
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userEntity");
+		if(user!=null) {
+			request.setAttribute("resumes", resumeService.getResumeByUser(user));
+			request.setAttribute("job", jobService.getJobById(id));
+		}
+		return "user/apply";
 	}
 	
 	@RequestMapping(value="user/apply_list")
@@ -58,24 +70,25 @@ public class ApplyController {
 		return res;
 	}
 	
-	@RequestMapping(value="add_apply")
-	public void addApply(HttpServletRequest request,HttpServletResponse response) {
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Date applyTime = dateFormat.parse((String)request.getParameter("applyTime"));
-		boolean isOffer = Boolean.parseBoolean((String)request.getParameter("isOffer"));
-		String jobId = request.getParameter("jobId");
+	@RequestMapping(value="user/add_apply")
+	@ResponseBody
+	public Map<String,Object> addApply(String jobId,String resumeId,HttpServletRequest request,HttpServletResponse response) {
+		Map<String,Object> res = new HashMap<String,Object>();
 		JobsEntity job = jobService.getJobById(jobId);
-//		String resumeId = request.getParameter("resumeId");
-//		ResumeEntity resume = resumeService.getResumeById(resumeId)
-		String userId = request.getParameter("userId");
-		UserEntity user = userService.getUserById(userId);
-		ApplyEntity apply = new ApplyEntity();
-//		apply.setApplyTime(applyTime);
-		apply.setJob(job);
-		apply.setOffer(isOffer);
-//		apply.setResume(resume);
-		apply.setUser(user);
-		applyService.addApply(apply);
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userEntity");
+		ResumeEntity resume = resumeService.getResumeById(resumeId);
+		if(resume.getUser().getId().equals(user.getId())) {
+			ApplyEntity apply = new ApplyEntity();
+			apply.setJob(job);
+			apply.setUser(user);
+			apply.setApplyTime(new Date());
+			apply.setResume(resume);
+			applyService.addApply(apply);
+			res.put("status", "ok");
+		}else {
+			res.put("status", "error");
+		}
+		return res;
 	}
 	
 }
