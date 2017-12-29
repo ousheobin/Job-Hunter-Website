@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+ <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <title>万才网</title>
@@ -15,7 +12,7 @@
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-message.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-job-detail.css" />
 </head>
 
 <body>
@@ -37,10 +34,10 @@
                     <li>
                         <a href="index.html">首页</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="discovery.html">发现</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="message.html">消息</a>
                     </li>
                     <li>
@@ -50,11 +47,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <c:if test="${sessionScope.isLogin != null }">
-                    			<a href="logout">退出</a>
-                    		</c:if>
-                    		<c:if test="${sessionScope.isLogin == null }">
-                    			<a href="login.html">登录或注册</a>
-                    		</c:if>
+                    		<a href="logout">退出</a>
+                    	</c:if>
+                    	<c:if test="${sessionScope.isLogin == null }">
+                    		<a href="login.html">登录或注册</a>
+                    	</c:if>
                     </li>
                 </ul>
             </div>
@@ -63,26 +60,36 @@
     <!-- Navbar end -->
     <!-- Banner Begin -->
     <div class="banner-container">
-        <p class="title">我的消息</p>
-        <p>Message</p>
+        <p class="title">${jobDetail.jobName }</p>
+        <p>${jobDetail.enterpise.enterpiseName }</p>
     </div>
     <!-- Banner End -->
     <!-- Main Container -->
-    <div class="container content">
-    <c:forEach items="${requestScope.pageBean.pageData }" var="item">
-    		<div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><fmt:formatDate value="${item.date }"/></h3>
-            </div>
-            <div class="panel-body">
-            	   <p>${item.message }</p>
-               <p><span class="delete" delete-id="${item.id }">删除本条</span></p>
-            </div>
+    <div class="container">
+        <div class="content">
+            <h3>职位信息 Offer Detail</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td class="col-md-4 text-right">薪酬水平 Salary</td>
+                    <td class="col-md-8">${jobDetail.lowSal }-${jobDetail.highSal }</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4 text-right">工作地点 Place</td>
+                    <td class="col-md-8">${jobDetail.place }</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4 text-right">岗位描述 Describe</td>
+                    <td class="col-md-8">${jobDetail.describe }</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4 text-right">岗位需求 Requires</td>
+                    <td class="col-md-8">${jobDetail.require }</td>
+                </tr>
+            </table>
+            <a class="btn btn-primary btn-block" href="apply.html?id=${jobDetail.id }">申请 Apply</a>
+            <p class="text-center"><a href="javascript:history.go(-1);">返回</a></p>
         </div>
-    </c:forEach>
     </div>
-    <!-- Cell End -->
-    ${requestScope.pageNavi }
     <div class="footer">
         <p>
             <a href="enterprise-login.html">我要发布招聘信息</a>
@@ -92,7 +99,6 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-message.js"></script>
 </body>
 
 </html>

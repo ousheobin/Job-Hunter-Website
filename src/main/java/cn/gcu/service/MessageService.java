@@ -9,6 +9,8 @@ public interface MessageService {
 	
 	public List<MessageEntity> getAllMessage(String userId);
 	
+	public MessageEntity getMessageById(String messageId);
+	
 	public void deleteMessage(String messageId);
 	
 	public void addMessage(MessageEntity message);

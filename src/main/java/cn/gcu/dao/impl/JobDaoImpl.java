@@ -40,4 +40,33 @@ public class JobDaoImpl extends BaseDaoImpl<JobsEntity,String> implements JobDao
 		return page;
 	}
 
+	public long countByUser(String keyword) {
+		String hql = "select count(*) from JobsEntity where jobName like ? or enterpise.enterpiseName like ? ";
+		return (long) getHibernateTemplate().find(hql,"%"+keyword+"%","%"+keyword+"%").get(0);
+	}
+	
+	@Override
+	public Page<JobsEntity> searchJob(int pageNumber, int prePage, String keyword) {
+		long sum = this.count();
+		final String hql = "from JobsEntity where isDelete = ? and ( jobName like ? or enterpise.enterpiseName like ? ) order by id desc";
+		final Page<JobsEntity> page = new Page<JobsEntity>();
+		PageUtil.generatePage(page, sum, prePage, pageNumber);
+		List<JobsEntity> res = getHibernateTemplate().execute(new HibernateCallback<List<JobsEntity>>() {
+
+			@Override
+			public List<JobsEntity> doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery(hql);
+				query.setBoolean(0,false);
+				query.setString(1, "%"+keyword+"%");
+				query.setString(2, "%"+keyword+"%");
+				query.setFirstResult((int) ((page.getPageNumber()-1)*page.getPageSize()));
+				query.setMaxResults((int) page.getPageSize());
+				return query.list();
+			}  
+			 
+        });
+		page.setPageData(res);
+		return page;
+	}
+
 }

@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_apply")
 public class ApplyEntity extends IdEntity {
@@ -17,16 +19,20 @@ public class ApplyEntity extends IdEntity {
 	@ManyToOne
 	@JoinColumn(name = "f_job")
 	private JobsEntity job;
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "f_user")
 	private UserEntity user;
+	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="f_resume")
+	@JoinColumn(name = "f_resume")
 	private ResumeEntity resume;
 	@Column(name = "f_apply_time")
 	private Date applyTime;
 	@Column(name = "f_is_offer")
-	private boolean isOffer;
+	private boolean isOffer = false;
+	@Column(name = "f_is_handle")
+	private boolean isHanle = false;
 
 	public JobsEntity getJob() {
 		return job;
@@ -44,6 +50,14 @@ public class ApplyEntity extends IdEntity {
 		this.user = user;
 	}
 
+	public ResumeEntity getResume() {
+		return resume;
+	}
+
+	public void setResume(ResumeEntity resume) {
+		this.resume = resume;
+	}
+
 	public Date getApplyTime() {
 		return applyTime;
 	}
@@ -59,13 +73,13 @@ public class ApplyEntity extends IdEntity {
 	public void setOffer(boolean isOffer) {
 		this.isOffer = isOffer;
 	}
-	
-	public ResumeEntity resume() {
-		return resume;
+
+	public boolean isHanle() {
+		return isHanle;
 	}
-	
-	public void setResume(ResumeEntity resume) {
-		this.resume = resume;
+
+	public void setHanle(boolean isHanle) {
+		this.isHanle = isHanle;
 	}
 
 }

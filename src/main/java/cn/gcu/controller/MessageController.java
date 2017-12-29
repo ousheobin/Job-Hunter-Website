@@ -58,10 +58,25 @@ public class MessageController {
 		return res;
 	}
 	
-	@RequestMapping(value="message_delete")
-	public void deleteMessage(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value="user/message_delete")
+	@ResponseBody
+	public Map<String,Object> deleteMessage(HttpServletRequest request,HttpServletResponse response) {
+		Map<String,Object> res = new HashMap<String,Object>();
 		String messageId = request.getParameter("messageId");
-		messageService.deleteMessage(messageId);
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userEntity");
+		String userId = user.getId();
+		MessageEntity msg = messageService.getMessageById(messageId);
+		if(msg!=null && msg.getId()!=null) {
+			if(msg.getUser().getId().equals(userId)) {
+				messageService.deleteMessage(messageId);
+				res.put("status", "ok");
+			}else {
+				res.put("status", "error");
+			}
+		}else {
+			res.put("status", "error");
+		}
+		return res;
 	}
 	
 	@RequestMapping(value="message_add")

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
@@ -11,8 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-index.css" />
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-regisiter.css" />
 </head>
 <body>
     <!-- Navbar Begin -->
@@ -34,7 +33,7 @@
                         <a href="index.html">首页</a>
                     </li>
                     <li>
-                        <a href="discovery.html">发现</a>
+                        <a href="discory.html">发现</a>
                     </li>
                     <li>
                         <a href="message.html">消息</a>
@@ -45,7 +44,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                    	<c:if test="${sessionScope.isLogin != null }">
+                        <c:if test="${sessionScope.isLogin != null }">
                     		<a href="logout">退出</a>
                     	</c:if>
                     	<c:if test="${sessionScope.isLogin == null }">
@@ -57,51 +56,40 @@
         </div>
     </nav>
     <!-- Navbar end -->
-    <!-- Slider Begin -->
-    <div class="slider-box">
-        <div id="slider" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#slider" data-slide-to="2"></li>
-                <li data-target="#slider" data-slide-to="1" class="active"></li>
-                <li data-target="#slider" data-slide-to="0"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item pic-3"></div>
-                <div class="item pic-1 active"></div>
-                <div class="item pic-2"></div>
-            </div>
-            <a class="left carousel-control" href="#slider" role="button" data-slide="prev">
-                <span class="fa fa-chevron-left" aria-hidden="true"></span>
-            </a>
-            <a class="right carousel-control" href="#slider" role="button" data-slide="next">
-                <span class="fa fa-chevron-right" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
-    <!-- Slider End -->
-    <!-- Main Container -->
     <div class="container">
-        <div>
-            <div class="header-row">
-                <a class="more" href="discovery.html">查看更多</a>
-                <h3 class="title">最新招聘信息</h3>
-            </div>
-            <c:forEach items="${requestScope.jobPage.pageData }" var="item">
-            <div class="col-md-3 col-xs-12 col-sm12 job-detail">
-                <a href="job-deatil-${item.id}.html">
-                    <p>${item.jobName }</p>
-                    <p>${item.enterpise.enterpiseName }</p>
-                </a>
-            </div>  
-            </c:forEach>
+        <div class="login-panel">
+            <h3>注册万才网账户</h3>
+            <form>
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="username" class="form-control" id="username" placeholder="请输入用户名">
+                </div>
+                <div class="row mobile-row mobile-row-form">
+                    <label class="col-md-12 no-left-padding">手机号码</label>
+                    <div class="col-md-12 row mobile-row">
+                        <div class="col-md-8 col-xs-8 col-sm-8 no-left-padding">
+                            <input type="text" class="form-control" placeholder="请输入手机号码">
+                        </div>
+                        <div class="col-md-4 col-xs-4 col-sm-4 btn-container">
+                            <button class="btn btn-primary btn-block">获取验证码</button>
+                        </div>
+                    </div>            
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <label for="password-repeat">请重复密码</label>
+                    <input type="password-repeat" class="form-control" id="password-repeat" placeholder="请输入密码">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">注册</button>
+            </form>
+            <hr>
+            <a href="login.html" class="btn btn-info btn-block">已有账户，点此登录</a>
         </div>
     </div>
-    <div class="join">
-        <p class="text-center">
-            <a href="login.html" class="btn btn-primary btn-lg">登录或注册，马上开始</a>
-        </p>
-    </div>
+
     <div class="footer">
         <p><a href="enterprise-login.html">我要发布招聘信息</a></p>
         <p>Guangzhou College &copy; 2006-2017 All rights reserve.</p>

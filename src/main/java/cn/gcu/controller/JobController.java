@@ -1,5 +1,8 @@
 package cn.gcu.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,12 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 //import cn.gcu.entity.EnterpiseEntity;
 import cn.gcu.entity.JobsEntity;
+import cn.gcu.pojo.Page;
 import cn.gcu.service.JobService;
+import cn.gcu.utils.PageUtil;
 
 @Controller
 public class JobController {
@@ -27,21 +33,43 @@ public class JobController {
 //	@Resource
 //	EnterpiseService enterpiseService;
 	
-	@RequestMapping(value="job_list")
-	@ResponseBody
-	public Map<String ,Object> getJobList(HttpServletRequest request,HttpServletResponse response){
-		List<JobsEntity> jList = jobService.getAllJob();
-		String listString = String.valueOf(jList);
-		Map<String ,Object> res = new HashMap<String ,Object>();
-		res.put("jobList", listString);
-		return res;
+	@RequestMapping(value="search.html")
+	public String searchResult(String page,String word,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		if(word==null || word.isEmpty()) {
+			response.sendRedirect("discovery.html");
+			return null;
+		}else {
+			int currentPage = 1;
+			if(page!=null && !page.isEmpty()) {
+				try {
+					currentPage = Integer.valueOf(page);
+				}catch(Exception e) {
+					
+				}
+			}
+			Page<JobsEntity> pageData = jobService.searchJob(currentPage, word);
+			String pageNavi = PageUtil.generateBootstrapNav(pageData, "search.html?word="+URLEncoder.encode(word, "utf-8")+"&page=${pageNumber}");
+			request.setAttribute("word", word);
+			request.setAttribute("pageData", pageData);
+			request.setAttribute("pageNavi", pageNavi);
+		}
+		return"public/search";
+	}
+
+	@RequestMapping(value="job-deatil-{id}.html")
+	public String getDetailPage(@PathVariable(value="id")String detailId,HttpServletRequest request,HttpServletResponse response) {
+		if(detailId!=null && !detailId.isEmpty()) {
+			JobsEntity job = jobService.getJobById(detailId);
+			request.setAttribute("jobDetail", job);
+		}
+		return "public/job-detail";
 	}
 	
-	@RequestMapping(value="delete_job")
-	public void deleteJob(HttpServletRequest request,HttpServletResponse response) {
-		String jobId = request.getParameter("jobId");
-		jobService.deleteJob(jobId);
-	}
+//	@RequestMapping(value="delete_job")
+//	public void deleteJob(HttpServletRequest request,HttpServletResponse response) {
+//		String jobId = request.getParameter("jobId");
+//		jobService.deleteJob(jobId);
+//	}
 	
 	@RequestMapping(value="add_job")
 	public void addJob(HttpServletRequest request,HttpServletResponse response) {

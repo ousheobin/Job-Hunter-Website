@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-  
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
@@ -67,7 +66,7 @@
     <!-- Main Container -->
     <div class="container">
         <form action="search.html" method="POST">
-            <input class="form-control" placeholder="请输入职位的关键词">
+            <input class="form-control" name="word" placeholder="请输入职位的关键词">
             <button class="btn btn-primary btn-primary btn-large">Search 搜索</button>
         </form>
     </div>

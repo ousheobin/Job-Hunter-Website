@@ -16,5 +16,7 @@ public interface JobService {
 	public void addJob(JobsEntity job);
 	
 	public Page<JobsEntity> getHomePageJobs();
+	
+	public Page<JobsEntity> searchJob(int pageNumber,String keyword);
 
 }

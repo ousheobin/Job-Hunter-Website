@@ -47,4 +47,9 @@ public class JobServiceImpl implements JobService{
 		return jobDao.queryByPage(1, 8);
 	}
 
+	@Override
+	public Page<JobsEntity> searchJob(int pageNumber, String keyword) {
+		return jobDao.searchJob(pageNumber, 15, keyword);
+	}
+
 }
