@@ -1,5 +1,6 @@
 var isSend = false;
-$("vericodeButton").click(function(){
+$("#vericodeButton").click(function(){
+	alert("click button");
 	var hasNotFinish = false;
 	var value = $("#phone").val();
 	if(value == "" || value.length < 1){
@@ -7,6 +8,7 @@ $("vericodeButton").click(function(){
 	}
 	if(hasNotFinish){
 		alert("您还有内容没填写，请重新检查一下哦");
+		return;
 	}
 	if(isSend){
 		return;
@@ -32,9 +34,10 @@ $("vericodeButton").click(function(){
 	});
 });
 
-$("submitButton").click(function(){
+$("#submitButton").click(function(){
 	var hasNotFinish = false;
-	textareas.each(function() {
+	var inputs = $(".login-panel").find("input");
+	inputs.each(function() {
 		var value = $(this).val();
 		if(value == "" || value.length < 1){
 			hasNotFinish = true;

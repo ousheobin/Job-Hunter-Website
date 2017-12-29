@@ -93,11 +93,13 @@ public class LoginController {
 	@RequestMapping(value="user_register")
 	@ResponseBody
 	public Map<String ,Object>userRegister(HttpServletRequest request,HttpServletResponse response){
+		System.out.println("start register");
 		Map<String ,Object> res = new HashMap<String ,Object>();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
 		String code = request.getParameter("vericode");
+		System.out.println("start register");
 		if(!username.isEmpty()&&!password.isEmpty()&&!phone.isEmpty()) {
 			UserEntity user = userService.getUserByUserName(username);
 				if(user!=null) {
@@ -210,6 +212,7 @@ public class LoginController {
 	@RequestMapping(value="getVericode")
 	@ResponseBody
 	public Map<String ,Object> getVericode(HttpServletRequest request,HttpServletResponse response){
+		System.out.println("getVericode");
 		Map<String ,Object> res = new HashMap<String ,Object>();
 		Date getVericodeDate = (Date)request.getSession().getAttribute("getVericodeDate");
 		String phone = request.getParameter("phone");

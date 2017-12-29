@@ -73,7 +73,7 @@
                             <input type="text" class="form-control" id="phone" placeholder="请输入手机号码">
                         </div>
                         <div class="col-md-4 col-xs-4 col-sm-4 btn-container">
-                            <button class="btn btn-primary btn-block" id="vericodeButton">获取验证码</button>
+                            <button type="button" class="btn btn-primary btn-block" id="vericodeButton">获取验证码</button>
                         </div>
                     </div>
                 </div>

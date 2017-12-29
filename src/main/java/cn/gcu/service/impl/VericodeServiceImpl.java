@@ -33,7 +33,7 @@ public class VericodeServiceImpl implements VericodeService{
 		else {
 			VericodeEntity vericode = list.get(0);
 			Date nowDate = new Date();
-			if(nowDate.compareTo(vericode.getExpireDate())>0) {
+			if(nowDate.compareTo(vericode.getExpireDate())<0) {
 				return vericode;
 			}
 			else {

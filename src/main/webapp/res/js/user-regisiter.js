@@ -1,6 +1,7 @@
-$("#rigisiterButton").click(function(){
+$("#regisiterButton").click(function(){
 	var hasNotFinish = false;
-	textareas.each(function() {
+	var inputs = $(".login-panel").find("input");
+	inputs.each(function() {
 		var value = $(this).val();
 		if(value == "" || value.length < 1){
 			hasNotFinish = true;
@@ -9,7 +10,7 @@ $("#rigisiterButton").click(function(){
 	if(hasNotFinish){
 		alert("您还有内容没填写，请重新检查一下哦");
 	}
-	else if(("#password").val()!=("#password-repeat").val){
+	else if($("#password").val()!=$("#password-repeat").val()){
 		alert("两次输入的密码不正确");
 	}
 	else {
@@ -17,10 +18,10 @@ $("#rigisiterButton").click(function(){
 			type : 'POST',
 			url : "user_register",
 			data : {
-				"username" : ("#username").val(),
-				"password" : ("#password").val(),
-				"phone" : ("#phone").val(),
-				"vericode" : ("#vericode").val()
+				"username" : $("#username").val(),
+				"password" : $("#password").val(),
+				"phone" : $("#phone").val(),
+				"vericode" : $("#vericode").val()
 			},
 			cache : false,
 			dataType : "json",
