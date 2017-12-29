@@ -1,5 +1,8 @@
 package cn.gcu.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 //import cn.gcu.entity.EnterpiseEntity;
 import cn.gcu.entity.JobsEntity;
+import cn.gcu.pojo.Page;
 import cn.gcu.service.JobService;
+import cn.gcu.utils.PageUtil;
 
 @Controller
 public class JobController {
@@ -26,6 +31,29 @@ public class JobController {
 	
 //	@Resource
 //	EnterpiseService enterpiseService;
+	
+	@RequestMapping(value="search.html")
+	public String searchResult(String page,String word,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		if(word==null || word.isEmpty()) {
+			response.sendRedirect("discovery.html");
+			return null;
+		}else {
+			int currentPage = 1;
+			if(page!=null && !page.isEmpty()) {
+				try {
+					currentPage = Integer.valueOf(page);
+				}catch(Exception e) {
+					
+				}
+			}
+			Page<JobsEntity> pageData = jobService.searchJob(currentPage, word);
+			String pageNavi = PageUtil.generateBootstrapNav(pageData, "search.html?word="+URLEncoder.encode(word, "utf-8")+"&page=${pageNumber}");
+			request.setAttribute("word", word);
+			request.setAttribute("pageData", pageData);
+			request.setAttribute("pageNavi", pageNavi);
+		}
+		return"public/search";
+	}
 	
 	@RequestMapping(value="job_list")
 	@ResponseBody
