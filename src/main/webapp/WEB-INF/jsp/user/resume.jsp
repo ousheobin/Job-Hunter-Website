@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
@@ -47,7 +47,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <c:if test="${sessionScope.isLogin != null }">
+                         <c:if test="${sessionScope.isLogin != null }">
                     			<a href="logout">退出</a>
                     		</c:if>
                     		<c:if test="${sessionScope.isLogin == null }">
@@ -76,8 +76,13 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="list-group row" id="apply-list">
-                    <div class="list-group-item text-left header">我的投递 My apply</div>
+            <div class="list-group row">
+                <div class="list-group-item text-left header">我的简历 My Resume <a class="btn btn-primary btn-xs new-resume" href="add-resume.html">创建新简历</a></div>
+                <c:forEach items="${requestScope.resumes }" var="item">
+                <a class="list-group-item text-left" href="#">
+                    	<p>${item.applyWork }</p>
+                </a>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -90,7 +95,6 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-mine.js"></script>
 </body>
 
 </html>

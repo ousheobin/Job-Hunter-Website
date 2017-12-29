@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
@@ -76,8 +76,26 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="list-group row" id="apply-list">
-                    <div class="list-group-item text-left header">我的投递 My apply</div>
+            <div class="list-group row">
+                <div class="list-group-item text-left header">修改密码 Change Password</div>
+                <div class="list-group-item text-left">
+                    <form>
+                        <div class="form-group">
+                            <label for="password-old">原始密码</label>
+                            <input type="password" class="form-control" id="password-old" placeholder="请输入用户名">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">新密码</label>
+                            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="password-repeat">请重复新密码</label>
+                            <input type="password" class="form-control" id="password-repeat" placeholder="请输入用户名">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">登录</button>
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -90,7 +108,6 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-mine.js"></script>
 </body>
 
 </html>

@@ -29,6 +29,8 @@ public class ResumeEntity extends IdEntity {
 	private String birthday;
 	@Column(name = "f_time_to_work")
 	private String timeToWork;
+	@Column(name = "f_email")
+	private String email;
 	@Column(name = "f_residence")
 	private String residence; // 现居住地址
 	@Column(name = "f_orign_residence")
@@ -97,6 +99,14 @@ public class ResumeEntity extends IdEntity {
 		this.timeToWork = timeToWork;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getResidence() {
 		return residence;
 	}
@@ -137,20 +147,20 @@ public class ResumeEntity extends IdEntity {
 		this.evaluate = evaluate;
 	}
 
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
 	public String getProjectExperience() {
 		return projectExperience;
 	}
 
 	public void setProjectExperience(String projectExperience) {
 		this.projectExperience = projectExperience;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 }

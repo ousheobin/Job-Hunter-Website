@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 
@@ -13,7 +12,7 @@
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-mine.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-forget-password.css" />
 </head>
 
 <body>
@@ -32,7 +31,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li class="active">
                         <a href="index.html">首页</a>
                     </li>
                     <li>
@@ -41,46 +40,58 @@
                     <li>
                         <a href="message.html">消息</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="mine.html">我的</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <c:if test="${sessionScope.isLogin != null }">
-                    			<a href="logout">退出</a>
-                    		</c:if>
-                    		<c:if test="${sessionScope.isLogin == null }">
-                    			<a href="login.html">登录或注册</a>
-                    		</c:if>
+                    		<a href="logout">退出</a>
+                    	</c:if>
+                    	<c:if test="${sessionScope.isLogin == null }">
+                    		<a href="login.html">登录或注册</a>
+                    	</c:if>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- Navbar end -->
-    <!-- Banner Begin -->
-    <div class="banner-container">
-        <p class="title">我</p>
-        <p>About Me</p>
-    </div>
-    <!-- Banner End -->
-    <!-- Main Container -->
-    <div class="container content">
-        <div class="col-md-3">
-            <div class="list-group">
-                <div class="list-group-item header"> 菜单 Menu</div>
-                <a href="mine.html" class="list-group-item">我的投递</a>
-                <a href="resume.html" class="list-group-item">我的简历</a>
-                <a href="info.html" class="list-group-item">个人信息</a>
-            </div>
+    <div class="container">
+        <div class="login-panel">
+            <h3>忘记密码</h3>
+            <form>
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="username" class="form-control" id="username" placeholder="请输入用户名">
+                </div>
+                <div class="row mobile-row mobile-row-form">
+                    <label class="col-md-12 no-left-padding">手机号码</label>
+                    <div class="col-md-12 row mobile-row">
+                        <div class="col-md-8 col-xs-8 col-sm-8 no-left-padding">
+                            <input type="text" class="form-control" placeholder="请输入手机号码">
+                        </div>
+                        <div class="col-md-4 col-xs-4 col-sm-4 btn-container">
+                            <button class="btn btn-primary btn-block">获取验证码</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">新密码</label>
+                    <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <label for="password-repeat">请重复新密码</label>
+                    <input type="password-repeat" class="form-control" id="password-repeat" placeholder="请输入密码">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">更新密码</button>
+            </form>
+            <hr>
+            <a href="login.html" class="btn btn-default btn-block">返回登录</a>
         </div>
-        <div class="col-md-9">
-            <div class="list-group row" id="apply-list">
-                    <div class="list-group-item text-left header">我的投递 My apply</div>
-            </div>
-        </div>
     </div>
+
     <div class="footer">
         <p>
             <a href="enterprise-login.html">我要发布招聘信息</a>
@@ -90,7 +101,6 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/user-mine.js"></script>
 </body>
 
 </html>

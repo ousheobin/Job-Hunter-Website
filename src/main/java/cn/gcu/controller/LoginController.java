@@ -32,6 +32,16 @@ public class LoginController {
 		return "public/default-login";
 	}
 	
+	@RequestMapping(value="regisiter.html")
+	public String getRegisiterPage(HttpServletRequest request,HttpServletResponse response) {
+		return "public/regisiter";
+	}
+	
+	@RequestMapping(value="forget-password.html")
+	public String getForgetPasswordPage(HttpServletRequest request,HttpServletResponse response) {
+		return "public/forget-password";
+	}
+	
 	/**
 	 * 异步请求返回JSON串
 	 * @param request
