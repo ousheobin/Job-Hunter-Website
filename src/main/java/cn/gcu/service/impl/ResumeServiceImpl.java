@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.gcu.dao.EducationDao;
 import cn.gcu.dao.ExperienceDao;
@@ -26,38 +27,48 @@ public class ResumeServiceImpl implements ResumeService {
 	EducationDao educationDao;
 
 	@Override
+	@Transactional
 	public void addResume(ResumeEntity resume) {
 		resumeDao.save(resume);
 	}
 
 	@Override
+	@Transactional
 	public void addExperience(ExperienceEntity expericnce) {
 		experienceDao.save(expericnce);
 	}
 
 	@Override
+	@Transactional
 	public void addEducation(EducationEntity education) {
 		educationDao.save(education);
 	}
 
 	@Override
+	@Transactional
 	public void updateResume(ResumeEntity resume) {
 		resumeDao.update(resume);
 	}
 
 	@Override
+	@Transactional
 	public void deleteExperience(ExperienceEntity experience) {
 		experienceDao.delete(experience);
 	}
 
 	@Override
+	@Transactional
 	public void deleteEducation(EducationEntity education) {
 		educationDao.delete(education);
 	}
 
 	@Override
+	@Transactional
 	public ResumeEntity getResumeById(String id) {
-		return resumeDao.get(id);
+		ResumeEntity resume =  resumeDao.get(id);
+		resume.getExperienceDetail().size();
+		resume.getEducationDeatil().size();
+		return resume;
 	}
 
 	@Override

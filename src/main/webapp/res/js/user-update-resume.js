@@ -21,8 +21,9 @@ $("#save-resume").click(function(){
 	}else{
 		$.ajax({
 			type : 'POST',
-			url : "user/add_resume",
+			url : "user/update_resume",
 			data:{
+				id:id,
 				name:$("#name").val(),
 				gender:$("input[name='gender']:checked").val(),
 				phone:$("#name").val(),
@@ -41,7 +42,11 @@ $("#save-resume").click(function(){
 			dataType : "json",
 			success : function(data) {
 				if(data.status == "ok"){
-					location.href="resume.html"
+					if(document.referrer!=null){
+						self.location=document.referrer;
+					}else{
+						history.back();
+					}
 				}else{
 					alert("出错了.Oops...");
 				}

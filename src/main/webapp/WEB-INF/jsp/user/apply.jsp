@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-mine.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-apply.css" />
 </head>
 
 <body>
@@ -35,19 +35,19 @@
                     <li>
                         <a href="index.html">首页</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="discovery.html">发现</a>
                     </li>
                     <li>
                         <a href="message.html">消息</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="mine.html">我的</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                         <c:if test="${sessionScope.isLogin != null }">
+                        <c:if test="${sessionScope.isLogin != null }">
                     			<a href="logout">退出</a>
                     		</c:if>
                     		<c:if test="${sessionScope.isLogin == null }">
@@ -61,30 +61,33 @@
     <!-- Navbar end -->
     <!-- Banner Begin -->
     <div class="banner-container">
-        <p class="title">我</p>
-        <p>About Me</p>
+        <p class="title" id="jobName">${job.jobName }</p>
+        <p id="company">${job.enterpise.enterpiseName }</p>
     </div>
     <!-- Banner End -->
     <!-- Main Container -->
-    <div class="container content">
-        <div class="col-md-3">
-            <div class="list-group">
-                <div class="list-group-item header"> 菜单 Menu</div>
-                <a href="mine.html" class="list-group-item">我的投递</a>
-                <a href="resume.html" class="list-group-item">我的简历</a>
-                <a href="info.html" class="list-group-item">个人信息</a>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="list-group row">
-                <div class="list-group-item text-left header">我的简历 My Resume <a class="btn btn-primary btn-xs new-resume" href="add-resume.html">创建新简历</a></div>
-                <c:forEach items="${requestScope.resumes }" var="item">
-                <a class="list-group-item text-left" href="resume-edit-${item.id }.html">
-                    	<p>${item.applyWork }</p>
-                    	<p style="font-size:12px;">${item.name}</p>
-                </a>
-                </c:forEach>
-            </div>
+    <div class="container">
+        <div class="content">
+            <h3 id="apply-title">选择简历 Choose Resume</h3>
+            <form>
+                <div>
+                    
+                    <c:forEach items="${requestScope.resumes }" var="item">
+                    <div class="radio">
+                    <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="${item.id }"> ${item.applyWork }
+                            <a href="resume-edit-${item.id }.html">查看简历</a>
+                     </label>
+                     </div>
+                    </c:forEach>
+                    
+                </div>
+                <p  class="new-resume">如果没有合适的简历，请先前往<a href="resume.html">简历管理</a>创建简历。
+            </form>
+            <button class="btn btn-primary btn-block" id="apply-btn">申请 Apply</button>
+            <p class="text-center back">
+                <a href="javascript:history.go(-1);">返回</a>
+            </p>
         </div>
     </div>
     <div class="footer">
@@ -94,8 +97,10 @@
         <p>Guangzhou College &copy; 2006-2017 All rights reserve.</p>
     </div>
     <!-- Main Container End -->
+    <script type="text/javascript">
+    		var jobId = "${job.id}";
+    </script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/apply.js"></script>
 </body>
-
-</html>

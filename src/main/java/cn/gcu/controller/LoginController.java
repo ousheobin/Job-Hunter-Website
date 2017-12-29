@@ -1,5 +1,6 @@
 package cn.gcu.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,5 +76,11 @@ public class LoginController {
 			res.put("message", "请求有误");
 		}
 		return res;
+	}
+	
+	@RequestMapping(value="logout")
+	public void logout(HttpServletRequest request , HttpServletResponse response) throws IOException {
+		request.getSession().invalidate();
+		response.sendRedirect("index.html");
 	}
 }

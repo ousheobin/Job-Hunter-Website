@@ -30,8 +30,8 @@ function getExperience() {
 		inputs.each(function() {
 			options[$(this).attr("name")] = $(this).val();
 		});
-		var selects = $(this).find('select');
-		selects.each(function() {
+		var textareas = $(this).find('textarea');
+		textareas.each(function() {
 			options[$(this).attr("name")] = $(this).val();
 		});
 		experience_list.push(options);

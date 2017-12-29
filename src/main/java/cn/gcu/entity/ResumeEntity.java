@@ -33,8 +33,8 @@ public class ResumeEntity extends IdEntity {
 	private String email;
 	@Column(name = "f_residence")
 	private String residence; // 现居住地址
-	@Column(name = "f_orign_residence")
-	private String orginResidence; // 户口地址
+	@Column(name = "f_origin_residence")
+	private String originResidence; // 户口地址
 	@OneToMany
 	@JoinColumn(name = "f_resume")
 	private List<EducationEntity> educationDeatil;
@@ -115,12 +115,12 @@ public class ResumeEntity extends IdEntity {
 		this.residence = residence;
 	}
 
-	public String getOrginResidence() {
-		return orginResidence;
+	public String getOriginResidence() {
+		return originResidence;
 	}
 
-	public void setOrginResidence(String orginResidence) {
-		this.orginResidence = orginResidence;
+	public void setOriginResidence(String originResidence) {
+		this.originResidence = originResidence;
 	}
 
 	public List<EducationEntity> getEducationDeatil() {
