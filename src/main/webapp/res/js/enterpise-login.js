@@ -1,6 +1,7 @@
-$("loginButton").click(function(){
+$("#loginButton").click(function(){
 	var hasNotFinish = false;
-	textareas.each(function() {
+	var inputs = $(".login-panel").find("input");
+	inputs.each(function() {
 		var value = $(this).val();
 		if(value == "" || value.length < 1){
 			hasNotFinish = true;
