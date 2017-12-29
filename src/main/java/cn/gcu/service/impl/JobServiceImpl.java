@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.gcu.dao.JobDao;
 import cn.gcu.entity.JobsEntity;
+import cn.gcu.pojo.Page;
 import cn.gcu.service.JobService;
 
 @Service
@@ -39,6 +40,11 @@ public class JobServiceImpl implements JobService{
 	@Transactional
 	public void addJob(JobsEntity job) {
 		jobDao.save(job);
+	}
+
+	@Override
+	public Page<JobsEntity> getHomePageJobs() {
+		return jobDao.queryByPage(1, 8);
 	}
 
 }

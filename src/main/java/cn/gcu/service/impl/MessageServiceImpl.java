@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.gcu.dao.MessageDao;
 import cn.gcu.entity.MessageEntity;
+import cn.gcu.pojo.Page;
 import cn.gcu.service.MessageService;
 
 @Service
@@ -35,6 +36,10 @@ public class MessageServiceImpl implements MessageService{
 		messageDao.save(message);
 	}
 
+	@Override
+	public Page<MessageEntity> queryByPage(int pageNumber, String userId) {
+		return messageDao.queryByPage(pageNumber, 15, userId);
+	}
 	
 	
 }

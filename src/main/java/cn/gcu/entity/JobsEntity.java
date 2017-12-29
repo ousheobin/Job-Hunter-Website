@@ -37,7 +37,7 @@ public class JobsEntity extends IdEntity {
 	@Column(name = "f_publish_date")
 	private Date publishDate;
 	@Column(name = "f_is_delete")
-	private boolean isDelete;
+	private boolean isDelete = false;
 
 	public String getJobName() {
 		return jobName;

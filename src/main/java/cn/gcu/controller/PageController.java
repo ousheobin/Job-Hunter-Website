@@ -1,13 +1,19 @@
 package cn.gcu.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cn.gcu.service.JobService;
+
 @Controller
 public class PageController {
+	
+	@Resource
+	JobService jobService;
 	
 	
 	/**
@@ -19,7 +25,13 @@ public class PageController {
 	 */
 	@RequestMapping(value= {"","/","index.html","index"})
 	public String getIndexPage(HttpServletRequest request , HttpServletResponse response) {
-		return "index";
+		request.setAttribute("jobPage", jobService.getHomePageJobs());
+		return "public/index";
+	}
+	
+	@RequestMapping(value="discovery.html")
+	public String getDiscoveryPage() {
+		return "public/discovery";
 	}
 
 }

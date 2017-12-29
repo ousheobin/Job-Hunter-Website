@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.gcu.entity.MessageEntity;
 import cn.gcu.service.MessageService;
 import cn.gcu.entity.UserEntity;
+import cn.gcu.pojo.Page;
 import cn.gcu.service.UserService;
+import cn.gcu.utils.PageUtil;
 
 @Controller
 public class MessageController {
@@ -27,10 +29,28 @@ public class MessageController {
 	@Resource 
 	UserService userService;
 	
-	@RequestMapping(value="message_list")
+	@RequestMapping(value="message.html")
+	public String getMessagePage(String page,HttpServletRequest request) {
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userEntity");
+		String userId = user.getId();
+		int pageNumber  = 1;
+		try {
+			pageNumber = Integer.valueOf(page);
+		}catch(Exception e) {
+			
+		}
+		Page<MessageEntity> pageBean = messageService.queryByPage(pageNumber, userId);
+		String pageNavi = PageUtil.generateBootstrapNav(pageBean, "message.html?page=${pageNumber}");
+		request.setAttribute("pageBean", pageBean);
+		request.setAttribute("pageNavi", pageNavi);
+		return "user/message";
+	}
+	
+//	@RequestMapping(value="message_list")
 	@ResponseBody
 	public Map<String,Object> getMessageList(HttpServletRequest request,HttpServletResponse response) {
-		String userId = request.getParameter("userId");
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userEntity");
+		String userId = user.getId();
 		List<MessageEntity> mList = messageService.getAllMessage(userId);
 		String listString = String.valueOf(mList);
 		Map<String,Object> res = new HashMap<String,Object>();

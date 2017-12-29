@@ -4,9 +4,40 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.stereotype.Repository;
+
 import cn.gcu.dao.JobDao;
 import cn.gcu.entity.JobsEntity;
+import cn.gcu.pojo.Page;
+import cn.gcu.utils.PageUtil;
 
+@Repository
 public class JobDaoImpl extends BaseDaoImpl<JobsEntity,String> implements JobDao{
+	
+	@Override
+	public Page<JobsEntity> queryByPage(int pageNumber , int prePage) {
+		long sum = this.count();
+		final String hql = "from JobsEntity where isDelete = ? order by id desc";
+		final Page<JobsEntity> page = new Page<JobsEntity>();
+		PageUtil.generatePage(page, sum, prePage, pageNumber);
+		List<JobsEntity> res = getHibernateTemplate().execute(new HibernateCallback<List<JobsEntity>>() {
+
+			@Override
+			public List<JobsEntity> doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery(hql);
+				query.setBoolean(0,false);
+				query.setFirstResult((int) ((page.getPageNumber()-1)*page.getPageSize()));
+				query.setMaxResults((int) page.getPageSize());
+				return query.list();
+			}  
+			 
+        });
+		page.setPageData(res);
+		return page;
+	}
 
 }

@@ -58,7 +58,7 @@ public class PageUtil {
 	 */
 	public static String generateBootstrapNav(Page<?> page, String baseUrl) {
 		StringBuffer strBuffer = new StringBuffer();
-		strBuffer.append("<nav aria-label=\"Page navigation\">\n  <ul class=\"pagination\">\n");
+		strBuffer.append("<nav class =\"text-center\">\n  <ul class=\"pagination\">\n");
 		// Prev
 		if (page.getFirstPage() < page.getPageNumber()) {
 			strBuffer.append("<li><a href=\"" + baseUrl.replace("${pageNumber}", Long.toString(page.getPrev()))

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.gcu.entity.UserEntity;
 import cn.gcu.service.UserService;
+import cn.gcu.utils.SecurityUtil;
 
 @Controller
 public class LoginController {
@@ -27,7 +29,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="login.html")
 	public String getLoginPage(HttpServletRequest request,HttpServletResponse response) {
-		return "login";
+		return "public/default-login";
 	}
 	
 	/**
@@ -36,12 +38,32 @@ public class LoginController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="login_comfirm")
+	@RequestMapping(value="public/login_comfirm")
 	@ResponseBody
-	public Map<String,Object> doLoginComfirm(HttpServletRequest request,HttpServletResponse response) {
+	public Map<String,Object> doLoginComfirm(String username, String password ,HttpServletRequest request,HttpServletResponse response) {
 		Map<String,Object> res = new HashMap<String,Object>();
-		res.put("status", "ok");
-		res.put("nextStep", "index.html");
+		if(!username.isEmpty() && ! password.isEmpty()) {
+			UserEntity userEntity = userService.getUserByUserName(username);
+			if( userEntity!=null ) {
+				String encryptPassword = SecurityUtil.encryptPassword(password);
+				if(encryptPassword.equals(userEntity.getPassword())) {
+					res.put("status", "ok");
+					res.put("nextStep", "index.html");
+					request.getSession().setAttribute("isLogin", true);
+					request.getSession().setAttribute("type", "user");
+					request.getSession().setAttribute("userEntity", userEntity);
+				}else {
+					res.put("status", "error");
+					res.put("message", "账户或密码有误");
+				}
+			}else {
+				res.put("status", "error");
+				res.put("message", "账户或密码有误");
+			}
+		}else {
+			res.put("status", "error");
+			res.put("message", "请求有误");
+		}
 		return res;
 	}
 }

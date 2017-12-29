@@ -50,8 +50,14 @@ public class SecurityUtil {
         return hexValue.toString();
     }
     
-    public static String encryptPassword(String password) throws Exception{
-    		return sha1Encode(md5Encode(password));
+    public static String encryptPassword(String password){
+	    	String target = "";
+	    	try {
+	    		target = sha1Encode(md5Encode(password));
+	    	}catch(Exception e) {
+	    		
+	    	}
+    		return target;
     }
 
 }
