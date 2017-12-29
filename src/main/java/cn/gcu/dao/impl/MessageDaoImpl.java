@@ -30,7 +30,7 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageEntity,String> implements
 	@Override
 	public Page<MessageEntity> queryByPage(int pageNumber, int prePage, String userId) {
 		long sum = this.countByUser(userId);
-		final String hql = "from MessageEntity where id = ? order by id desc";
+		final String hql = "from MessageEntity where user.id = ? order by id desc";
 		final Page<MessageEntity> page = new Page<MessageEntity>();
 		PageUtil.generatePage(page, sum, prePage, pageNumber);
 		List<MessageEntity> res = getHibernateTemplate().execute(new HibernateCallback<List<MessageEntity>>() {

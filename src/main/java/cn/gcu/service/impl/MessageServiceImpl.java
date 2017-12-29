@@ -40,6 +40,11 @@ public class MessageServiceImpl implements MessageService{
 	public Page<MessageEntity> queryByPage(int pageNumber, String userId) {
 		return messageDao.queryByPage(pageNumber, 15, userId);
 	}
+
+	@Override
+	public MessageEntity getMessageById(String messageId) {
+		return messageDao.get(messageId);
+	}
 	
 	
 }
