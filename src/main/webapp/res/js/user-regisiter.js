@@ -49,7 +49,7 @@ $("vericodeButton").click(function(){
 		alert("您还有内容没填写，请重新检查一下哦");
 	}
 	$.ajax({
-		type : "POST",
+		type : 'POST',
 		url : "getVericode",
 		data : {
 			"phone" : ("#phone").val()

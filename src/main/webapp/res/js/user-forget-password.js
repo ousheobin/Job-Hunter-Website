@@ -8,7 +8,7 @@ $("vericodeButton").click(function(){
 		alert("您还有内容没填写，请重新检查一下哦");
 	}
 	$.ajax({
-		type : "POST",
+		type : 'POST',
 		url : "getVericode",
 		data : {
 			"phone" : ("#phone").val()
@@ -41,7 +41,7 @@ $("submitButton").click(function(){
 		alert("两次输入的密码不正确");
 	}
 	$.ajax({
-		type : "POST",
+		type : 'POST',
 		url : "forget_password",
 		data : {
 			"username":("#username").val(),

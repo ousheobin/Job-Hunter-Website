@@ -58,7 +58,7 @@
                     <label for="password">密码</label>
                     <input type="password" class="form-control" id="password" placeholder="请输入密码">
                 </div>
-                <button type="submit" class="btn btn-success btn-block">登录</button>
+                <button type="button" class="btn btn-success btn-block" id="loginButton">登录</button>
             </form>
             <hr>
             <p class="text-center">对企业登录有疑问，请联系客户服务部门:</p>

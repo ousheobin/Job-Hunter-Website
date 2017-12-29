@@ -89,7 +89,7 @@
                     <label for="password-repeat">请重复新密码</label>
                     <input type="password-repeat" class="form-control" id="password-repeat" placeholder="请输入密码">
                 </div>
-                <button type="submit" class="btn btn-success btn-block" id="submitButton">更新密码</button>
+                <button type="button" class="btn btn-success btn-block" id="submitButton">更新密码</button>
             </form>
             <hr>
             <a href="login.html" class="btn btn-default btn-block">返回登录</a>
