@@ -68,7 +68,7 @@
                 <div class="list-group-item text-left">
                     <div class="form-group">
                         <label>招聘岗位</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="jobName">
                     </div>
                     <div class="form-group">
                         <label>工资</label>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="form-group">
                         <label>工作地点</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="place">
                     </div>
                 </div>
             </div>
@@ -94,15 +94,15 @@
                 <div class="list-group-item text-left">
                     <div class="form-group">
                         <label>岗位描述</label>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" id="describe"></textarea>
                     </div>
                     <div class="form-group">
                         <label>岗位要求</label>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" id="require"></textarea>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success btn-block">发布</button>
+            <button class="btn btn-success btn-block" id="publish">发布</button>
         </div>
     </div>
     <div class="footer">
@@ -114,6 +114,7 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/add-job.js"></script>
 </body>
 
 </html>

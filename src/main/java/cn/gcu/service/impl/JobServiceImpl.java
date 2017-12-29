@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.gcu.dao.JobDao;
+import cn.gcu.entity.EnterpiseEntity;
 import cn.gcu.entity.JobsEntity;
 import cn.gcu.pojo.Page;
 import cn.gcu.service.JobService;
@@ -50,6 +51,11 @@ public class JobServiceImpl implements JobService{
 	@Override
 	public Page<JobsEntity> searchJob(int pageNumber, String keyword) {
 		return jobDao.searchJob(pageNumber, 15, keyword);
+	}
+
+	@Override
+	public Page<JobsEntity> getJobsByEnterpise(EnterpiseEntity enterpise,int page) {
+		return jobDao.getJobsByEnterpise(enterpise, 5, page);
 	}
 
 }

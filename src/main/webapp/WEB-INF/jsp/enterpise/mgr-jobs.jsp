@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 
@@ -11,8 +13,8 @@
     <meta name="description" content="" />
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" type="text/css" href="../css/style-bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style-enterpise.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-enterpise.css" />
 </head>
 
 <body>
@@ -64,44 +66,16 @@
         </div>
         <div class="col-md-9">
             <div class="list-group row">
-                <div class="list-group-item text-left header">目前正在进行的招聘<a class="btn btn-primary btn-xs new-job" href="new-resume.html">发布新招聘</a></div>
-                <a class="list-group-item text-left" href="#">
-                    <p>机器学习工程师</p>
-                    <p>2017-10-10</p>
+                <div class="list-group-item text-left header">目前正在进行的招聘<a class="btn btn-primary btn-xs new-job" href="publish-jobs.html">发布新招聘</a></div>
+                <c:forEach items="${jobsPage.pageData }" var="item">
+                <a class="list-group-item text-left" href="job-deatil-${item.id }.html">
+                    <p>${item.jobName }</p>
+                    <p>${item.enterpise.enterpiseName }</p>
                 </a>
-                <a class="list-group-item text-left" href="#">
-                    <p>机器学习工程师</p>
-                    <p>2017-10-10</p>
-                </a>
-                <a class="list-group-item text-left" href="#">
-                    <p>机器学习工程师</p>
-                    <p>2017-10-10</p>
-                </a>
-                <a class="list-group-item text-left" href="#">
-                    <p>机器学习工程师</p>
-                    <p>2017-10-10</p>
-                </a>
-                <a class="list-group-item text-left" href="#">
-                    <p>机器学习工程师</p>
-                    <p>2017-10-10</p>
-                </a>
+                </c:forEach>
             </div>
             <!-- Pagination Begin -->
-            <nav class="text-center">
-                <ul class="pagination">
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2 </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">»</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            ${requestScope.navi }
             <!-- Pagination End -->
         </div>
     </div>
@@ -112,8 +86,8 @@
         <p>Guangzhou College &copy; 2006-2017 All rights reserve.</p>
     </div>
     <!-- Main Container End -->
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
 </body>
 
 </html>

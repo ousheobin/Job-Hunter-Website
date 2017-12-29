@@ -20,7 +20,7 @@ $("#loginButton").click(function(){
 		},
 		success:function(data){
 			if(data.status == "ok"){
-				location.href="index.html";
+				location.href="mgr-apply.html";
 			}
 			else {
 				alert("错误："+data.message);

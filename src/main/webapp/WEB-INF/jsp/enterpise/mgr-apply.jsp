@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 
@@ -66,88 +68,35 @@
             <div class="list-group row">
                 <div class="list-group-item text-left header">目前收到的简历</div>
                 <!-- Item Begin -->
-                <a href="#" class="list-group-item text-left">
+                <c:forEach items="${requestScope.applyPage.pageData}" var="item">
+                 <a href="#" class="list-group-item text-left">
                     <div class="row">
                         <div class="col-md-8 col-xs-8 col-sm-8">
-                            <p class="job">机器学习工程师</p>
-                            <p>2017-10-10</p>
+                            <p class="job">${item.job.jobName }</p>
+                            <p>${item.resume.name }</p>
                         </div>
                         <div>
-                            <p class="status not-handle">企业未处理</p>
+                        <c:if test="${item.hanle }">
+                        		<c:if test="${item.offer }">
+                        		 <p class="status offer">企业批准</p>
+                        		</c:if>
+                        		<c:if test="${!item.offer }">
+                        		 <p class="status refuse">企业已回绝</p>
+                        		</c:if>
+                        </c:if>
+                        <c:if test="${!item.hanle }">
+                        <p class="status not-handle">企业未处理</p>
+                        </c:if>
+                            
                         </div>
                     </div>
                 </a>
-                <!-- Item End -->
-                <!-- Item Begin -->
-                <a href="#" class="list-group-item text-left">
-                    <div class="row">
-                        <div class="col-md-8 col-xs-8 col-sm-8">
-                            <p class="job">机器学习工程师</p>
-                            <p>2017-10-10</p>
-                        </div>
-                        <div>
-                            <p class="status not-handle">企业未处理</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- Item End -->
-                <!-- Item Begin -->
-                <a href="#" class="list-group-item text-left">
-                    <div class="row">
-                        <div class="col-md-8 col-xs-8 col-sm-8">
-                            <p class="job">机器学习工程师</p>
-                            <p>2017-10-10</p>
-                        </div>
-                        <div>
-                            <p class="status not-handle">企业未处理</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- Item End -->
-                <!-- Item Begin -->
-                <a href="#" class="list-group-item text-left">
-                    <div class="row">
-                        <div class="col-md-8 col-xs-8 col-sm-8">
-                            <p class="job">机器学习工程师</p>
-                            <p>2017-10-10</p>
-                        </div>
-                        <div>
-                            <p class="status offer">已通知面试</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- Item End -->
-                <!-- Item Begin -->
-                <a href="#" class="list-group-item text-left">
-                    <div class="row">
-                        <div class="col-md-8 col-xs-8 col-sm-8">
-                            <p class="job">机器学习工程师</p>
-                            <p>2017-10-10</p>
-                        </div>
-                        <div>
-                            <p class="status offer">已通知面试</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- Item End -->
+                </c:forEach>
+
 
             </div>
             <!-- Pagination Begin -->
-            <nav class="text-center">
-                <ul class="pagination">
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2 </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">»</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            ${navi }
             <!-- Pagination End -->
         </div>
     </div>
