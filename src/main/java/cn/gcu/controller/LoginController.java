@@ -241,7 +241,7 @@ public class LoginController {
 	public Map<String ,Object> forgetPassword(HttpServletRequest request,HttpServletResponse response){
 		Map<String ,Object> res = new HashMap<String ,Object>();
 		String username = request.getParameter("username");
-		String code = request.getParameter("vericode");
+		String code = request.getParameter("code");
 		String newPassword = request.getParameter("newPassword");
 		String phone = request.getParameter("phone");
 		VericodeEntity vericode = vericodeService.getVericodeByPhone(phone);

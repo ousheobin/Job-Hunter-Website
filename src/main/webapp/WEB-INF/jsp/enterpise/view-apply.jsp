@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 
@@ -13,6 +14,9 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/style-enterpise.css" />
+    <script type="text/javascript">
+    		var id = "${applyEntity.id}";
+    </script>
 </head>
 
 <body>
@@ -66,66 +70,69 @@
             <div class="list-group row">
                 <div class="list-group-item text-left header">申请职位 Apply Job</div>
                 <div class="list-group-item text-left">
-                    <p>机器学习工程师</p>
+                    <p>${applyEntity.job.jobName }</p>
                 </div>
             </div>
             <div class="list-group row">
                 <div class="list-group-item text-left header">基本信息 Infomation</div>
                 <div class="list-group-item text-left">
-                    <p>姓名：</p>
-                    <p>性别：</p>
-                    <p>出生年月：</p>
-                    <p>参加工作室时间：</p>
-                    <p>现在居住的城市：</p>
-                    <p>户口所在地：</p>
-                    <p>手机号码：</p>
-                    <p>电子邮箱：</p>
+                    <p>姓名：${applyEntity.resume.name }</p>
+                    <p>性别：${applyEntity.resume.gender }</p>
+                    <p>出生年月：${applyEntity.resume.birthday }</p>
+                    <p>参加工作室时间：${applyEntity.resume.timeToWork }</p>
+                    <p>现在居住的城市：${applyEntity.resume.residence }</p>
+                    <p>户口所在地：${applyEntity.resume.originResidence }</p>
+                    <p>手机号码：${applyEntity.resume.phone }</p>
+                    <p>电子邮箱：${applyEntity.resume.email }</p>
                 </div>
             </div>
             <div class="list-group row">
                 <div class="list-group-item text-left header">教育信息 Education Information</div>
+                <c:forEach items="${requestScope.applyEntity.resume.educationDeatil }" var="item">
                 <div class="list-group-item education">
-                    <p>学校名称</p>
-                    <p>入学时间</p>
-                    <p>毕业时间</p>
-                    <p>专业</p>
-                    <p>学位学历</p>
+                    <p>学校名称：${item.schoolName }</p>
+                    <p>入学时间：${item.enrollmentTime }</p>
+                    <p>毕业时间：${item.graduateTime }</p>
+                    <p>专业：${item.major }</p>
+                    <p>学位学历：${item.degree }</p>
                 </div>
-                <div class="list-group-item education">
-                    <p>学校名称</p>
-                    <p>入学时间</p>
-                    <p>毕业时间</p>
-                    <p>专业</p>
-                    <p>学位学历</p>
-                </div>
+                </c:forEach>
+                
             </div>
             <div class="list-group row">
                 <div class="list-group-item text-left header">工作经历 Work Experience</div>
+                 <c:forEach items="${requestScope.applyEntity.resume.experienceDetail }" var="item">
                 <div class="list-group-item experience">
-                    <p>公司名称</p>
-                    <p>开始时间</p>
-                    <p>结束时间</p>
-                    <p>所在行业</p>
-                    <p>工作描述</p>
+                    <p>公司名称：${item.companyName }</p>
+                    <p>开始时间：${item.beginTime }</p>
+                    <p>结束时间：${item.endTime }</p>
+                    <p>所在行业：${item.industry }</p>
+                    <p>工作描述：${item.describe }</p>
                 </div>
+                </c:forEach>
             </div>
             <div class="list-group row">
                 <div class="list-group-item text-left header">项目经验 Project Experience</div>
                 <div class="list-group-item text-left">
-                    <p>项目经验</p>
+                    <p>${applyEntity.resume.projectExperience }</p>
                 </div>
             </div>
             <div class="list-group row">
                 <div class="list-group-item text-left header">自我评价 Self-Appraisal</div>
                 <div class="list-group-item text-left">
-                    <p>自我评价</p>
+                    <p>${applyEntity.resume.evaluate }</p>
                 </div>
             </div>
             <div class="list-group row">
                 <div class="list-group-item text-left header">操作 Operation</div>
                 <div class="list-group-item text-center">
-                    <button class="btn btn-info">通过建立，允许面试</button>
-                    <button class="btn btn-danger">拒绝简历</button>
+                <c:if test="${!applyEntity.handle }">
+                	   <button class="btn btn-info" id="acceptBtn" type="button">通过简历，允许面试</button> 
+                    <button class="btn btn-danger" id="refuseBtn" type="button">拒绝简历</button>
+                </c:if>
+                <c:if test="${applyEntity.handle }">
+                	   <p>您已经处理了本简历</p>
+                </c:if>
                 </div>
             </div>
         </div>
@@ -139,6 +146,9 @@
     <!-- Main Container End -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/bootstrap.min.js"></script>
+     <c:if test="${!applyEntity.handle }">
+     <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/handle-apply.js"></script>    
+     </c:if>
 </body>
 
 </html>

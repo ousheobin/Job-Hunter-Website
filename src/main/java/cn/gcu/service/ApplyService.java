@@ -14,5 +14,9 @@ public interface ApplyService {
 	
 	public void addApply(ApplyEntity apply);
 	
+	public void updateApply(ApplyEntity apply);
+	
+	public ApplyEntity getApplyById(String id);
+	
 	public Page<ApplyEntity> getApplyByEnterpise(EnterpiseEntity enterpise,int pageNumber);
 }

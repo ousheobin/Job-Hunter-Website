@@ -11,7 +11,7 @@ $(document).ready(function(){
 				$.each(data.applyList,function(index,item){
 					html+= "<div class=\"list-group-item text-left\"><div class=\"row\"><div class=\"col-md-8 col-xs-8 col-sm-8\">"+
                                 "<p class=\"job\">"+item.job.jobName+"</p><p class=\"company\">"+item.job.enterpise.enterpiseName+"</p>";
-					if(item.hanle){
+					if(item.handle){
 						if(item.offer){
 							html += "</div> <div> <p class=\"status offer\">已通知面试</p> </div> </div> </div>";
 						}else{

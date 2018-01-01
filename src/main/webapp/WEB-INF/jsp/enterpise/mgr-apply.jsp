@@ -69,14 +69,14 @@
                 <div class="list-group-item text-left header">目前收到的简历</div>
                 <!-- Item Begin -->
                 <c:forEach items="${requestScope.applyPage.pageData}" var="item">
-                 <a href="#" class="list-group-item text-left">
+                 <a href="view-apply.html?id=${item.id }" class="list-group-item text-left">
                     <div class="row">
                         <div class="col-md-8 col-xs-8 col-sm-8">
                             <p class="job">${item.job.jobName }</p>
                             <p>${item.resume.name }</p>
                         </div>
                         <div>
-                        <c:if test="${item.hanle }">
+                        <c:if test="${item.handle }">
                         		<c:if test="${item.offer }">
                         		 <p class="status offer">企业批准</p>
                         		</c:if>
@@ -84,7 +84,7 @@
                         		 <p class="status refuse">企业已回绝</p>
                         		</c:if>
                         </c:if>
-                        <c:if test="${!item.hanle }">
+                        <c:if test="${!item.handle }">
                         <p class="status not-handle">企业未处理</p>
                         </c:if>
                             

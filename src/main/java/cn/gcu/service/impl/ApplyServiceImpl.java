@@ -43,4 +43,19 @@ public class ApplyServiceImpl implements ApplyService {
 		return applyDao.getApplyByEnterpise(enterpise, 5, pageNumber);
 	}
 
+	@Override
+	@Transactional
+	public ApplyEntity getApplyById(String id) {
+		ApplyEntity apply = applyDao.get(id);
+		apply.getResume().getEducationDeatil().size();
+		apply.getResume().getExperienceDetail().size();
+		return apply;
+	}
+
+	@Override
+	@Transactional
+	public void updateApply(ApplyEntity apply) {
+		applyDao.update(apply);
+	}
+
 }

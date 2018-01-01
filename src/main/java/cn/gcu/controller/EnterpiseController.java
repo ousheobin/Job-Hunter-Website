@@ -1,6 +1,8 @@
 package cn.gcu.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.gcu.entity.ApplyEntity;
 import cn.gcu.entity.EnterpiseEntity;
@@ -77,12 +80,64 @@ public class EnterpiseController {
 	@RequestMapping(value="publish-jobs.html")
 	public String getPublishJobsPage(HttpServletRequest request,HttpServletResponse response ) throws IOException {
 		String type = (String) request.getSession().getAttribute("type");
-		if(type!=null && type.equals("enterpise")) {
-			
-		}else {
+		if(type==null || !type.equals("enterpise")) {
 			response.sendRedirect("index.html");
 		}
 		return "enterpise/publish-jobs";
+	}
+	
+	@RequestMapping(value="view-apply.html")
+	public String viewApply( String id, HttpServletRequest request,HttpServletResponse response ) throws IOException {
+		String type = (String) request.getSession().getAttribute("type");
+		if(type==null || !type.equals("enterpise")) {
+			response.sendRedirect("index.html");
+		}
+		if(id!=null && id.length() > 0){
+			ApplyEntity apply = applyService.getApplyById(id);
+			if(apply!=null) {
+				request.setAttribute("applyEntity", apply);
+			}else {
+				response.sendRedirect("mgr-apply.html");
+			}
+		}else {
+			response.sendRedirect("mgr-apply.html");
+		}
+		
+		return "enterpise/view-apply";
+	}
+	
+	@RequestMapping(value="enterpise/handle_apply")
+	@ResponseBody
+	public Map<String,Object> handleApply( String id, String flag,HttpServletRequest request,HttpServletResponse response ) throws IOException {
+		Map<String,Object> res  = new HashMap<String,Object>();
+		String type = (String) request.getSession().getAttribute("type");
+		EnterpiseEntity enterpise = (EnterpiseEntity) request.getSession().getAttribute("enterpiseEntity");
+		if(type==null || !type.equals("enterpise")) {
+			response.sendRedirect("index.html");
+		}
+		if(id!=null && id.length() > 0){
+			ApplyEntity apply = applyService.getApplyById(id);
+			if(apply!=null) {
+				if(enterpise.getId().equals(apply.getJob().getEnterpise().getId())) {
+					apply.setHandle(true);
+					if(flag!=null && flag.equals("accept")) {
+						apply.setOffer(true);
+					}else {
+						apply.setOffer(false);
+					}
+					applyService.updateApply(apply);
+					res.put("status", "ok");
+				}else {
+					res.put("status", "error");
+				}
+			}else {
+				res.put("status", "error");
+			}
+		}else {
+			res.put("status", "error");
+		}
+		
+		return res;
 	}
 
 }

@@ -32,7 +32,7 @@ public class ApplyEntity extends IdEntity {
 	@Column(name = "f_is_offer")
 	private boolean isOffer = false;
 	@Column(name = "f_is_handle")
-	private boolean isHanle = false;
+	private boolean isHandle = false;
 
 	public JobsEntity getJob() {
 		return job;
@@ -74,12 +74,12 @@ public class ApplyEntity extends IdEntity {
 		this.isOffer = isOffer;
 	}
 
-	public boolean isHanle() {
-		return isHanle;
+	public boolean isHandle() {
+		return isHandle;
 	}
 
-	public void setHanle(boolean isHanle) {
-		this.isHanle = isHanle;
+	public void setHandle(boolean isHandle) {
+		this.isHandle = isHandle;
 	}
 
 }
