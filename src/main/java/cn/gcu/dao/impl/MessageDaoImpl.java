@@ -15,6 +15,7 @@ import cn.gcu.pojo.Page;
 import cn.gcu.utils.PageUtil;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class MessageDaoImpl extends BaseDaoImpl<MessageEntity,String> implements MessageDao{
 
 	@Override

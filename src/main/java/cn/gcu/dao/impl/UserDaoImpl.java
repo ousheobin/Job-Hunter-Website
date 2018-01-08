@@ -9,6 +9,7 @@ import cn.gcu.dao.UserDao;
 import cn.gcu.entity.UserEntity;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class UserDaoImpl extends BaseDaoImpl<UserEntity,String> implements UserDao {
 
 	@Override

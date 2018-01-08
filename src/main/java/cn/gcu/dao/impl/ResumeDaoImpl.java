@@ -9,6 +9,7 @@ import cn.gcu.entity.ResumeEntity;
 import cn.gcu.entity.UserEntity;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class ResumeDaoImpl extends BaseDaoImpl < ResumeEntity, String > implements ResumeDao {
 
 	@Override

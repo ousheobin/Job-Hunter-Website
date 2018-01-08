@@ -8,6 +8,7 @@ import cn.gcu.dao.EnterpiseDao;
 import cn.gcu.entity.EnterpiseEntity;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class EnterpiseDaoImpl extends BaseDaoImpl<EnterpiseEntity ,String> implements EnterpiseDao{
 
 	@Override

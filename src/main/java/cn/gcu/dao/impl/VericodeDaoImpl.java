@@ -8,6 +8,7 @@ import cn.gcu.dao.VericodeDao;
 import cn.gcu.entity.VericodeEntity;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class VericodeDaoImpl extends BaseDaoImpl<VericodeEntity,String> implements VericodeDao{
 
 	@Override
